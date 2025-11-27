@@ -1,4 +1,4 @@
-🏗️ Construction & House Painting Services – Landing Page - Live Link : https://construction-house-painting-homepage.netlify.app/
+🏗️ Construction & House Painting Services – Landing Page - Live Link : https://construction-homepage.netlify.app/
 
 A modern, fully responsive single-page website designed for Construction & House Painting businesses.
 Built with Vite + React + Bootstrap 5 for high performance, fast development, and seamless deployment on platforms like Netlify, Vercel, or GitHub Pages.
