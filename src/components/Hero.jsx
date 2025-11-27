@@ -13,7 +13,7 @@ const Hero = () => {
           <a href="#contact" className="btn btn-warning btn-lg px-4 text-uppercase fw-semibold">
             Book Now
           </a>
-          <a href="#contact" className="btn btn-outline-light btn-lg px-4 text-uppercase fw-semibold">
+          <a href="#contact" className="btn btn-outline-danger btn-lg px-4 text-uppercase fw-semibold">
             Get Free Quote
           </a>
         </div>
@@ -23,5 +23,6 @@ const Hero = () => {
 };
 
 export default Hero;
+
 
 

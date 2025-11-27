@@ -1,7 +1,8 @@
 :root {
-  --brand-dark: #0f172a;
+  --brand-dark: #0b1120;
   --brand-gold: #f5b31f;
   --brand-gray: #f7f8fa;
+  --brand-muted: #4b5563;
 }
 
 html {
@@ -12,6 +13,74 @@ body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #1f2937;
   background-color: #ffffff;
+}
+
+section h2,
+section h3,
+section h5 {
+  color: var(--brand-dark);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.35rem;
+  transition: color 0.3s ease;
+}
+
+section p.text-muted,
+section .subtitle {
+  color: var(--brand-muted) !important;
+}
+
+.text-uppercase.text-muted {
+  color: var(--brand-gold) !important;
+  letter-spacing: 0.35rem;
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.text-uppercase.text-muted:hover {
+  color: var(--brand-dark) !important;
+  transform: translateY(-2px);
+}
+
+section h2:hover,
+section h3:hover,
+section h5:hover {
+  color: var(--brand-gold);
+}
+
+section h2::after,
+section h3::after,
+section h5::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--brand-gold);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+section h2:hover::after,
+section h3:hover::after,
+section h5:hover::after {
+  width: 100%;
+}
+
+.hero-section h1 {
+  color: #fff !important;
+}
+
+.hero-section p,
+.hero-section .btn-outline-light {
+  color: #fff;
+}
+
+.why-us-section,
+.testimonials,
+.contact-section {
+  color: var(--brand-dark);
 }
 
 .page-content {
@@ -96,6 +165,123 @@ section {
   transform: scale(1.08);
 }
 
+.before-after-section {
+  background-color: #ffffff;
+}
+
+.before-after-card {
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.before-after-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 1.5rem 3rem rgba(15, 23, 42, 0.18);
+}
+
+.before-after-frame {
+  height: 280px;
+}
+
+.before-after-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.before-after-img.before-state {
+  filter: grayscale(1) saturate(0.3) brightness(0.85);
+}
+
+.before-after-img.after-state {
+  filter: none;
+}
+
+.after-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateX(-1px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--brand-gold);
+  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+
+.before-after-slider {
+  position: absolute;
+  bottom: 16px;
+  left: 12px;
+  right: 12px;
+  appearance: none;
+  height: 4px;
+  background: rgba(15, 23, 42, 0.15);
+  border-radius: 999px;
+}
+
+.before-after-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--brand-gold);
+  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+.before-after-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--brand-gold);
+  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+.before-after-frame .label {
+  position: absolute;
+  top: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.35);
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.before-label {
+  left: 12px;
+}
+
+.after-label {
+  right: 12px;
+}
+
+.before-after-card h5 {
+  color: var(--brand-dark);
+}
+
 .testimonial-card {
   max-width: 640px;
 }
@@ -148,6 +334,7 @@ section {
   color: #ffffff !important;
 }
 
+
 @media (max-width: 576px) {
   .hero-section {
     min-height: 80vh;
@@ -157,6 +344,39 @@ section {
   .cta-section {
     width: 100%;
     border-radius: 0;
+  }
+}
+
+@media (hover: none) {
+  section h2,
+  section h3,
+  section h5 {
+    padding-bottom: 0.4rem;
+  }
+
+  section h2::after,
+  section h3::after,
+  section h5::after {
+    width: 64px;
+    opacity: 0.85;
+  }
+
+  section h2:active,
+  section h3:active,
+  section h5:active,
+  section h2:focus-visible,
+  section h3:focus-visible,
+  section h5:focus-visible {
+    color: var(--brand-gold);
+  }
+
+  section h2:active::after,
+  section h3:active::after,
+  section h5:active::after,
+  section h2:focus-visible::after,
+  section h3:focus-visible::after,
+  section h5:focus-visible::after {
+    width: 100%;
   }
 }
 

@@ -18,7 +18,7 @@ const marqueeStyles = `
     display: flex;
     gap: 1.5rem;
     will-change: transform;
-    animation: gallery-scroll 40s linear infinite;
+    animation: gallery-scroll 7s linear infinite;
   }
 
   .gallery-marquee-item {

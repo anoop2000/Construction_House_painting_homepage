@@ -4,6 +4,7 @@ import Hero from '../components/Hero.jsx';
 import Services from '../components/Services.jsx';
 import WhyChooseUs from '../components/WhyChooseUs.jsx';
 import Gallery from '../components/Gallery.jsx';
+import BeforeAfter from '../components/BeforeAfter.jsx';
 import Testimonials from '../components/Testimonials.jsx';
 import Footer from '../components/Footer.jsx';
 import { sendContactForm } from '../api.js';
@@ -45,6 +46,7 @@ const HomePage = () => {
         <Services />
         <WhyChooseUs />
         <Gallery />
+        <BeforeAfter />
         <Testimonials />
         <section id="contact" className="py-5 contact-section">
           <div className="container">
