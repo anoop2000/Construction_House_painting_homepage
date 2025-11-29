@@ -20,8 +20,8 @@ const Footer = () => {
           {['facebook', 'instagram'].map((network) => {
             const href =
               network === 'facebook'
-                ? 'https://facebook.com/yourpage'
-                : 'https://instagram.com/yourpage';
+                ? 'https://facebook.com'
+                : 'https://instagram.com';
             return (
               <a
                 key={network}

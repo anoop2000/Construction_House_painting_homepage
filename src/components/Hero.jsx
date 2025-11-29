@@ -9,10 +9,8 @@ const Hero = () => {
         <p className="lead mb-4">
           From custom builds to luxury finishes, we deliver craftsmanship that lasts.
         </p>
-        <div className="d-flex flex-column flex-sm-row justify-content-center gap-3">
-          <a href="#contact" className="btn btn-warning btn-lg px-4 text-uppercase fw-semibold">
-            Book Now
-          </a>
+        <div className="d-flex flex-column flex-sm-row justify-content-center gap-6">
+         
           <a href="#contact" className="btn btn-outline-danger btn-lg px-4 text-uppercase fw-semibold">
             Get Free Quote
           </a>
