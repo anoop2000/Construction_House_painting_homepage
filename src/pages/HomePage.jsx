@@ -123,7 +123,6 @@ const HomePage = () => {
           <div className="container">
             <div className="row align-items-center g-4">
               <div className="col-lg-6">
-                <p className="text-uppercase text-muted mb-2">Contact</p>
                 <h2 className="fw-bold mb-3">Ready to discuss your next project?</h2>
                 <p className="text-muted">
                   Share a few project details and our project manager will schedule a walkthrough at your preferred time.

@@ -10,7 +10,7 @@ const WhyChooseUs = () => {
     <section id="why-us" className="py-5 why-us-section">
       <div className="container">
         <div className="text-center mb-5">
-          <p className="text-uppercase text-muted mb-2">Why Choose Us</p>
+          
           <h2 className="fw-bold">We Build With Integrity</h2>
         </div>
         <div className="row g-4">

@@ -21,7 +21,7 @@ const Services = () => {
     <section id="services" className="py-5 bg-light">
       <div className="container">
         <div className="text-center mb-5">
-          <p className="text-uppercase text-muted mb-2">What We Do</p>
+          
           <h2 className="fw-bold">Professional Services</h2>
           <p className="text-muted">Modern craftsmanship powered by detail-oriented experts.</p>
         </div>

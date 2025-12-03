@@ -20,7 +20,6 @@ const Testimonials = () => {
     <section id="testimonials" className="py-5 bg-light">
       <div className="container">
         <div className="text-center mb-4">
-          <p className="text-uppercase text-muted mb-2">Testimonials</p>
           <h2 className="fw-bold">What Clients Say</h2>
         </div>
         <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -32,7 +31,7 @@ const Testimonials = () => {
                     <img src={testimonial.avatar} alt={testimonial.name} className="rounded-circle me-3 testimonial-avatar" />
                     <div>
                       <h5 className="mb-0">{testimonial.name}</h5>
-                      <small className="text-muted">{testimonial.role}</small>
+                      <small className="text-muted mt-1 d-block">{testimonial.role}</small>
                     </div>
                   </div>
                   <p className="mb-3">{testimonial.feedback}</p>

@@ -57,7 +57,6 @@ const BeforeAfter = () => {
     <section id="before-after" className="py-5 before-after-section">
       <div className="container">
         <div className="text-center mb-4">
-          <p className="text-uppercase text-muted mb-2">Before & After</p>
           <h2 className="fw-bold">Before & After Transformations</h2>
           <p className="text-muted subtitle">See the Difference Professional Painting Makes</p>
         </div>
