@@ -130,8 +130,8 @@ const sliderStyles = `
   .lightbox-content {
     position: relative;
     width: 100%;
-    max-width: 1200px;
-    max-height: 90vh;
+    max-width: 95vw;
+    max-height: 95vh;
     padding: 1.5rem 2rem;
     background: radial-gradient(circle at top, rgba(148, 163, 184, 0.2), rgba(15, 23, 42, 0.95));
     border-radius: 18px;
@@ -180,8 +180,8 @@ const sliderStyles = `
   .lightbox-image-wrapper {
     position: relative;
     flex: 1;
-    height: 60vh;
-    max-height: 60vh;
+    height: 80vh;
+    max-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -319,8 +319,8 @@ const sliderStyles = `
 
     .lightbox-image-wrapper {
       width: 100%;
-      height: 55vh;
-      max-height: 55vh;
+      height: 75vh;
+      max-height: 75vh;
       border-radius: 12px;
     }
 
@@ -484,7 +484,7 @@ const Gallery = () => {
   const currentImage = images[currentIndex] || images[0];
 
   return (
-    <section id="gallery" className="py-5">
+    <section id="gallery" className="py-5 themed-gallery">
       <style>{sliderStyles}</style>
       <div className="container">
         <div className="text-center mb-4">

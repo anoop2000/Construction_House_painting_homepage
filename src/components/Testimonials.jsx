@@ -17,7 +17,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="py-5 bg-light">
+    <section id="testimonials" className="py-5 themed-testimonials">
       <div className="container">
         <div className="text-center mb-4">
           <h2 className="fw-bold">What Clients Say</h2>
@@ -26,12 +26,14 @@ const Testimonials = () => {
           <div className="carousel-inner">
             {testimonials.map((testimonial, index) => (
               <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={testimonial.name}>
-                <div className="testimonial-card mx-auto bg-white shadow-sm rounded-4 p-4">
+                <div className="testimonial-card mx-auto shadow-sm rounded-4 p-4 themed-card">
                   <div className="d-flex align-items-center mb-3">
                     <img src={testimonial.avatar} alt={testimonial.name} className="rounded-circle me-3 testimonial-avatar" />
                     <div>
                       <h5 className="mb-0">{testimonial.name}</h5>
-                      <small className="text-muted mt-1 d-block">{testimonial.role}</small>
+                      <small className="text-muted mt-1 d-block themed-card-muted">
+                        {testimonial.role}
+                      </small>
                     </div>
                   </div>
                   <p className="mb-3">{testimonial.feedback}</p>
@@ -43,7 +45,7 @@ const Testimonials = () => {
             ))}
           </div>
           <div className="d-flex justify-content-center gap-3 mt-4">
-            <button className="btn btn-outline-dark btn-sm" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <button className="btn btn-dark btn-sm" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
               Prev
             </button>
             <button className="btn btn-dark btn-sm" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">

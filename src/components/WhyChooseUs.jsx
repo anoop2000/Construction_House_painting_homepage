@@ -7,7 +7,7 @@ const highlights = [
 
 const WhyChooseUs = () => {
   return (
-    <section id="why-us" className="py-5 why-us-section">
+    <section id="why-us" className="py-5 why-us-section themed-section">
       <div className="container">
         <div className="text-center mb-5">
           
@@ -16,12 +16,12 @@ const WhyChooseUs = () => {
         <div className="row g-4">
           {highlights.map((item) => (
             <div className="col-md-6 col-lg-3" key={item.title}>
-              <div className="p-4 bg-white rounded-4 shadow-sm h-100 text-center why-card">
+              <div className="p-4 rounded-4 shadow-sm h-100 text-center why-card themed-card">
                 <div className="icon-circle mx-auto mb-3">
                   <i className={`bi ${item.icon}`}></i>
                 </div>
                 <h5 className="fw-bold mb-2">{item.title}</h5>
-                <p className="text-muted mb-0">{item.text}</p>
+                <p className="text-muted mb-0 themed-card-muted">{item.text}</p>
               </div>
             </div>
           ))}

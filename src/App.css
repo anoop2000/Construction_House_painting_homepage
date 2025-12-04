@@ -11,8 +11,9 @@ html {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #1f2937;
-  background-color: #ffffff;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 section h2,
@@ -23,6 +24,19 @@ section h5 {
   display: inline-block;
   padding-bottom: 0.35rem;
   transition: color 0.3s ease;
+}
+
+/* Make main section headings white in dark theme, still turning yellow on hover */
+body.dark-theme section h2,
+body.dark-theme section h3,
+body.dark-theme section h5 {
+  color: #ffffff;
+}
+
+body.dark-theme section h2:hover,
+body.dark-theme section h3:hover,
+body.dark-theme section h5:hover {
+  color: var(--brand-gold);
 }
 
 section p.text-muted,
@@ -106,12 +120,12 @@ section {
   border-radius: 1rem;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 0 rgba(245, 179, 31, 0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
-.service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 1.25rem 2.5rem rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(245, 179, 31, 0.35);
+/* Ensure services cards use dark card background in dark theme */
+body.dark-theme .service-card {
+  background-color: var(--card-bg) !important;
 }
 
 .service-image-wrapper {
@@ -130,18 +144,46 @@ section {
   transform: scale(1.08);
 }
 
+/* Theme-specific card shadows and image behavior */
+
+body.light-theme .service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 1.25rem 2.5rem rgba(15, 23, 42, 0.22);
+}
+
+body.dark-theme .service-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .service-image-wrapper img {
+  filter: brightness(0.98);
+}
+
 .why-us-section {
-  background-color: var(--brand-gray);
+  background-color: var(--card-bg);
 }
 
 .why-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .why-card:hover {
   transform: translateY(-6px) scale(1.02);
   background-color: #ffffff;
-  box-shadow: 0 1rem 2rem rgba(15, 23, 42, 0.12);
+  box-shadow: 0 1rem 2rem rgba(15, 23, 42, 0.12), 0 0 0 4px rgba(242, 201, 76, 0.25);
+  border-color: #f2c94c;
+}
+
+/* In dark mode, keep why-card background dark on hover instead of turning white */
+body.dark-theme .why-card:hover {
+  background-color: var(--card-bg);
+  border-color: #f2c94c;
+  box-shadow: 0 1rem 2rem rgba(15, 23, 42, 0.12), 0 0 0 4px rgba(242, 201, 76, 0.25);
 }
 
 .icon-circle {
@@ -166,7 +208,7 @@ section {
 }
 
 .before-after-section {
-  background-color: #ffffff;
+  background-color: var(--bg-color);
 }
 
 .before-after-card {
@@ -292,6 +334,11 @@ section {
   object-fit: cover;
 }
 
+/* Slightly lighter role text in testimonials for dark theme only */
+body.dark-theme .testimonial-card .themed-card-muted {
+  color: #f3f4f6 !important;
+}
+
 .cta-section {
   background: linear-gradient(135deg, #1f2937, #111827);
   border-radius: 24px;
@@ -303,13 +350,38 @@ section {
   background: radial-gradient(circle at top right, rgba(245, 179, 31, 0.18), transparent 55%);
 }
 
+/* Contact form dark-mode theming via CSS variables */
+.contact-section .form-label {
+  color: var(--label-color);
+}
+
+.contact-section .form-control {
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+}
+
+.contact-section .form-control::placeholder {
+  color: var(--input-placeholder);
+}
+
+.contact-section .form-control:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: var(--input-focus-shadow);
+}
+
+body.dark-theme .contact-section .btn-warning {
+  color: var(--btn-text-darkmode);
+  filter: brightness(1.05);
+}
+
 .footer-section {
-  background-color: #0b1120;
+  background-color: var(--footer-bg);
   min-height: 120px;
 }
 
 .footer-contact {
-  color: #e5e7eb;
+  color: var(--text-color);
   font-weight: 500;
 }
 
@@ -318,7 +390,7 @@ section {
 }
 
 .footer-icon-link {
-  color: #e5e7eb;
+  color: var(--text-color);
 }
 
 .footer-icon-link:hover {

@@ -25,7 +25,7 @@ const BeforeAfterCard = ({ title, before, after, description }) => {
   const [position, setPosition] = useState(50);
 
   return (
-    <div className="before-after-card p-3 bg-white rounded-4 shadow-sm h-100">
+    <div className="before-after-card p-3 rounded-4 shadow-sm h-100 themed-card">
       <div className="before-after-frame position-relative overflow-hidden rounded-4 mb-3">
         <img src={before} alt={`${title} before`} className="before-after-img before-state" loading="lazy" />
         <div className="after-overlay" style={{ width: `${position}%` }}>
@@ -47,7 +47,7 @@ const BeforeAfterCard = ({ title, before, after, description }) => {
         <div className="label after-label">After</div>
       </div>
       <h5 className="fw-bold mb-2">{title}</h5>
-      <p className="text-muted mb-0">{description}</p>
+      <p className="text-muted mb-0 themed-card-muted">{description}</p>
     </div>
   );
 };

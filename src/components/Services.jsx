@@ -18,7 +18,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-5 bg-light">
+    <section id="services" className="py-5 themed-section">
       <div className="container">
         <div className="text-center mb-5">
           
@@ -28,7 +28,7 @@ const Services = () => {
         <div className="row g-4">
           {services.map((service) => (
             <div className="col-md-4" key={service.title}>
-              <div className="card service-card h-100 border-0">
+              <div className="card service-card h-100 border-0 themed-card">
                 <div className="service-image-wrapper">
                   <img
                     src={service.image}
@@ -41,7 +41,7 @@ const Services = () => {
                 </div>
                 <div className="card-body">
                   <h5 className="card-title fw-bold">{service.title}</h5>
-                  <p className="card-text text-muted">{service.description}</p>
+                  <p className="card-text text-muted themed-card-muted">{service.description}</p>
                 </div>
               </div>
             </div>

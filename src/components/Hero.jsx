@@ -1,8 +1,8 @@
 const Hero = () => {
   return (
-    <section id="home" className="hero-section text-center text-white d-flex align-items-center">
+    <section id="home" className="hero-section text-center text-white d-flex align-items-center themed-section">
       <div className="container">
-        <span className="badge bg-warning text-dark mb-3 text-uppercase">Premium Services</span>
+        <span className="badge mb-3 text-uppercase themed-hero-badge">Premium Services</span>
         <h1 className="display-4 fw-bold mb-3">
           Construction & House Painting Services You Can Trust
         </h1>

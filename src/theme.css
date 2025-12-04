@@ -1,0 +1,173 @@
+/* Global theme variables and helpers */
+
+:root {
+  /* Default to light theme values; will be overridden by body.light-theme / body.dark-theme */
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --card-bg: #f8f9fa;
+  --nav-bg: #ffffff;
+  --footer-bg: #f1f1f1;
+  --border-color: #dddddd;
+}
+
+body.light-theme {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --card-bg: #f8f9fa;
+  --nav-bg: #ffffff;
+  --footer-bg: #f1f1f1;
+  --border-color: #dddddd;
+  --card-border: #dddddd;
+  --muted-text-color: #4b5563;
+  --input-border: #d1d5db;
+  --toggle-bg: #f5f5f5;
+  --toggle-border: #dddddd;
+  --toggle-icon: #222222;
+  --toggle-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-theme {
+  --bg-color: #0d0d0d;
+  --text-color: #f1f1f1;
+  --card-bg: #1a1a1a;
+  --nav-bg: #121212;
+  --footer-bg: #181818;
+  --border-color: #333333;
+  --card-border: #2a2a2a;
+  --muted-text-color: #cccccc;
+  --form-bg: #1a1a1a;
+  --form-border: #2a2a2a;
+  --form-shadow: 0 6px 30px rgba(255, 255, 255, 0.04);
+  --label-color: #e6e6e6;
+  --input-bg: #0f0f0f;
+  --input-border: #333333;
+  --input-text: #e6e6e6;
+  --input-placeholder: #888888;
+  --input-focus-border: #f2c94c;
+  --input-focus-shadow: 0 0 0 4px rgba(242, 201, 76, 0.25);
+  --btn-text-darkmode: #222222;
+  --toggle-bg: #1e1e1e;
+  --toggle-border: #333333;
+  --toggle-icon: #ffffff;
+  --toggle-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+}
+
+/* Generic helpers that use CSS variables – attach these to sections/cards/etc. */
+
+.themed-page {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.themed-section {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.themed-card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--card-border, var(--border-color));
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.themed-card-muted {
+  color: var(--muted-text-color, var(--text-color)) !important;
+  opacity: 1;
+}
+
+.themed-nav {
+  background-color: var(--nav-bg) !important;
+  color: var(--text-color);
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.themed-nav .navbar-brand,
+.themed-nav .nav-link {
+  color: var(--text-color) !important;
+}
+
+.themed-nav .nav-link:hover,
+.themed-nav .nav-link:focus {
+  color: var(--text-color) !important;
+  opacity: 0.8;
+}
+
+.theme-toggle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  box-shadow: var(--toggle-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.75rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease,
+    transform 0.1s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .theme-toggle-btn:hover {
+  box-shadow: 0 3px 12px rgba(255, 255, 255, 0.12);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.92);
+}
+
+.theme-toggle-btn svg,
+.theme-toggle-btn i {
+  color: var(--toggle-icon);
+  font-size: 18px;
+  transition: color 0.25s ease;
+}
+
+.theme-toggle-icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+}
+
+.themed-footer {
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.themed-footer,
+.themed-footer a {
+  color: var(--text-color) !important;
+}
+
+.themed-footer a:hover {
+  opacity: 0.85;
+}
+
+.themed-gallery {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.themed-testimonials {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.themed-hero-badge {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color);
+}
+
+

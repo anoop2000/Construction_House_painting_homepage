@@ -1,10 +1,10 @@
 const Footer = () => {
   return (
-    <footer className="footer-section text-white py-4">
+    <footer className="footer-section themed-footer py-4">
       <div className="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
         <div>
           <h5 className="fw-bold mb-1">PrimeBuild Construction</h5>
-          <p className="mb-0" style={{color:"white"}}>Building spaces that inspire.</p>
+          <p className="mb-0">Building spaces that inspire.</p>
         </div>
         <div className="footer-contact">
           <div className="footer-contact-item">

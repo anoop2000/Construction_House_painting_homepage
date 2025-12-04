@@ -100,7 +100,7 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      <main className="page-content">
+      <main className="page-content themed-page">
         <Hero />
 
         <Suspense fallback={<div className="py-5 text-center" style={{ color: "#4F46E5" }}>Loading Our Services...</div>}>
@@ -130,7 +130,14 @@ const HomePage = () => {
                 
               </div>
               <div className="col-lg-6">
-                <div className="card border-0 shadow-sm">
+                <div
+                  className="card border-0 shadow-sm"
+                  style={{
+                    backgroundColor: 'var(--form-bg)',
+                    boxShadow: 'var(--form-shadow)',
+                    border: '1px solid var(--form-border)',
+                  }}
+                >
                   <div className="card-body p-4">
                     <form onSubmit={handleSubmit}>
                       <div className="mb-3">
