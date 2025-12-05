@@ -8,12 +8,6 @@ const images = [
     caption: 'Project: Modern Kerala home exterior makeover · UV-resistant + all-weather protection',
   },
   {
-    src: 'images/modern_interior.jpg',
-    title: 'Sophisticated Modern Interior Refinish',
-    description: 'Wall refinishing with smooth, seamless textures and a luxury muted palette built to complement premium interiors. Designed for homes requiring class, comfort, and modern elegance.',
-    caption: 'Project: Premium apartment interior repaint · Soft-touch matte finish · 2-day completion',
-  },
-  {
     src: 'images/nalukettu_veedu.jpg',
     title: 'Heritage Nalukettu Restoration',
     description: 'A tasteful repaint preserving the cultural charm of Nalukettu architecture with fresh, breathable colors and natural finishes that highlight wooden elements.',
@@ -24,18 +18,6 @@ const images = [
     title: 'Timeless Traditional Interior Repaint',
     description: 'Smooth, polished wall finishes paired with rich, elegant tones to enhance the warmth and classic character of traditional living spaces.',
     caption: 'Project: Full interior repaint · Durable stain-resistant finish',
-  },
-  {
-    src: 'images/premium_home_office.jpg',
-    title: 'Premium Modern Home Office Repaint',
-    description: 'Customized low-sheen color palette designed for productivity, comfort, and a clean backdrop perfect for video calls and daily professional use.',
-    caption: 'Project: Home office repaint · Low-VOC, professional finish',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1599427303058-f04cbcf4756f',
-    title: 'Elegant Hallway and Entryway',
-    description: 'Seamless wall surfaces, crisp lines, and durable paint built for everyday traffic.',
-    caption: 'Project: Home office repaint · Low-VOC professional matte finish · Designed for long-hours comfort',
   },
 ];
 
@@ -119,7 +101,8 @@ const sliderStyles = `
   .lightbox-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.92);
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -133,9 +116,6 @@ const sliderStyles = `
     max-width: 95vw;
     max-height: 95vh;
     padding: 1.5rem 2rem;
-    background: radial-gradient(circle at top, rgba(148, 163, 184, 0.2), rgba(15, 23, 42, 0.95));
-    border-radius: 18px;
-    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.9);
     color: #f9fafb;
     display: flex;
     flex-direction: column;
@@ -173,21 +153,20 @@ const sliderStyles = `
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    flex: 1;
+    width: 100%;
     min-height: 0;
   }
 
   .lightbox-image-wrapper {
     position: relative;
-    flex: 1;
-    height: 80vh;
-    max-height: 80vh;
+    width: 100%;
+    max-width: 95vw;
+    height: 85vh;
+    max-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-radius: 16px;
-    background: radial-gradient(circle at top left, rgba(51, 65, 85, 0.6), rgba(15, 23, 42, 0.95));
   }
 
   .lightbox-image-wrapper img {
@@ -252,6 +231,7 @@ const sliderStyles = `
 
   .lightbox-info {
     text-align: left;
+    margin-top: 1.75rem;
   }
 
   .lightbox-info h3 {
@@ -309,7 +289,6 @@ const sliderStyles = `
       max-width: 100%;
       max-height: 100vh;
       padding: 1rem 1.25rem 1.25rem;
-      border-radius: 0;
     }
 
     .lightbox-main {
@@ -319,9 +298,9 @@ const sliderStyles = `
 
     .lightbox-image-wrapper {
       width: 100%;
+      max-width: 95vw;
       height: 75vh;
       max-height: 75vh;
-      border-radius: 12px;
     }
 
     .lightbox-arrow {
@@ -350,9 +329,11 @@ const getItemsPerView = (width) => {
 };
 
 const Gallery = () => {
-  const [pageIndex, setPageIndex] = useState(0);
+  const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(getItemsPerView(window.innerWidth));
-  const [wrapperWidth, setWrapperWidth] = useState(0);
+  const [translateX, setTranslateX] = useState(0);
+  const trackRef = useRef(null);
+  const itemRefs = useRef([]);
   const wrapperRef = useRef(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -362,10 +343,9 @@ const Gallery = () => {
 
   useEffect(() => {
     const updateDimensions = () => {
-      setItemsPerView(getItemsPerView(window.innerWidth));
-      if (wrapperRef.current) {
-        setWrapperWidth(wrapperRef.current.offsetWidth);
-      }
+      const width = window.innerWidth;
+      const newItemsPerView = getItemsPerView(width);
+      setItemsPerView(newItemsPerView);
     };
 
     updateDimensions();
@@ -373,17 +353,37 @@ const Gallery = () => {
     return () => window.removeEventListener('resize', updateDimensions);
   }, []);
 
-  useEffect(() => {
-    if (wrapperRef.current) {
-      setWrapperWidth(wrapperRef.current.offsetWidth);
-    }
-    setPageIndex((prev) => {
-      const maxPageIndex = Math.max(0, Math.ceil(images.length / itemsPerView) - 1);
-      return Math.min(prev, maxPageIndex);
-    });
-  }, [itemsPerView]);
+  // Calculate max index - allow scrolling until the last item is visible
+  const maxItemIndex = Math.max(0, images.length - itemsPerView);
 
-  const maxPageIndex = Math.max(0, Math.ceil(images.length / itemsPerView) - 1);
+  // Calculate translation by measuring actual item positions
+  useEffect(() => {
+    const calculateTranslation = () => {
+      if (itemRefs.current[currentItemIndex] && trackRef.current) {
+        const currentItem = itemRefs.current[currentItemIndex];
+        const itemOffsetLeft = currentItem.offsetLeft;
+        const trackPaddingLeft = 24; // 1.5rem in pixels
+        const newTranslateX = -(itemOffsetLeft - trackPaddingLeft);
+        setTranslateX(newTranslateX);
+      } else {
+        // Fallback calculation for initial render
+        const getItemWidth = () => {
+          const width = window.innerWidth;
+          if (width >= 1024) return 320;
+          if (width >= 768) return 280;
+          return width - 32;
+        };
+        const gap = 24; // 1.5rem in pixels
+        const fallbackTranslateX = -(currentItemIndex * (getItemWidth() + gap));
+        setTranslateX(fallbackTranslateX);
+      }
+    };
+
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      setTimeout(calculateTranslation, 0);
+    });
+  }, [currentItemIndex, itemsPerView]);
 
   const openLightbox = (index) => {
     setCurrentIndex(index);
@@ -473,14 +473,20 @@ const Gallery = () => {
   }, [isLightboxOpen]);
 
   const handleNext = () => {
-    setPageIndex((prev) => Math.min(prev + 1, maxPageIndex));
+    setCurrentItemIndex((prev) => {
+      // Move to next item, but don't go beyond maxItemIndex
+      const next = Math.min(prev + 1, maxItemIndex);
+      return next;
+    });
   };
 
   const handlePrev = () => {
-    setPageIndex((prev) => Math.max(prev - 1, 0));
+    setCurrentItemIndex((prev) => {
+      // Move to previous item, but don't go below 0
+      return Math.max(prev - 1, 0);
+    });
   };
 
-  const translateX = wrapperWidth ? -(pageIndex * wrapperWidth) : 0;
   const currentImage = images[currentIndex] || images[0];
 
   return (
@@ -496,17 +502,24 @@ const Gallery = () => {
             type="button"
             className="gallery-arrow left"
             onClick={handlePrev}
-            disabled={pageIndex === 0}
+            disabled={currentItemIndex === 0}
             aria-label="Previous projects"
           >
             &#8592;
           </button>
           <div className="gallery-carousel" ref={wrapperRef}>
-            <div className="gallery-track" style={{ transform: `translateX(${translateX}px)` }}>
+            <div 
+              className="gallery-track" 
+              ref={trackRef}
+              style={{ transform: `translateX(${translateX}px)` }}
+            >
               {images.map((image, index) => (
                 <div
                   className="gallery-item"
                   key={`${image.src}-${index}`}
+                  ref={(el) => {
+                    if (el) itemRefs.current[index] = el;
+                  }}
                   onClick={() => openLightbox(index)}
                   role="button"
                   tabIndex={0}
@@ -530,7 +543,7 @@ const Gallery = () => {
             type="button"
             className="gallery-arrow right"
             onClick={handleNext}
-            disabled={pageIndex === maxPageIndex}
+            disabled={currentItemIndex >= maxItemIndex}
             aria-label="Next projects"
           >
             &#8594;

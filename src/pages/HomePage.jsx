@@ -108,17 +108,17 @@ const HomePage = () => {
         </Suspense>
 
 
-        <WhyChooseUs />
-
         <Suspense fallback={<div className="py-5 text-center" style={{ color: "#EA580C" }} >Loading Gallery...</div>}>
         <Gallery />
         </Suspense>
+
+        {/* <WhyChooseUs /> */}
 
         <Suspense fallback={<div className="py-5 text-center" style={{ color: "#1E3A8A" }} >Loading Before & After section...</div>}>
         <BeforeAfter />
         </Suspense>
 
-        <Testimonials />
+        {/* <Testimonials /> */}
         <section id="contact" className="py-5 contact-section">
           <div className="container">
             <div className="row align-items-center g-4">
