@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 const images = [
   {
     src: '/images/kerala-home-modern.jpg',
-    title: 'Elegant Kerala Contemporary Home Exterior',
+    title: 'Elegant Kerala Style Modern Home',
     description: 'A full professional exterior repaint using weather-shield coatings, enhancing the architecture’s clean lines and natural light. Balanced tones chosen to elevate curb appeal and long-term durability.',
     caption: 'Project: Modern Kerala home exterior makeover · UV-resistant + all-weather protection',
   },
@@ -13,89 +13,191 @@ const images = [
     description: 'A tasteful repaint preserving the cultural charm of Nalukettu architecture with fresh, breathable colors and natural finishes that highlight wooden elements.',
     caption: 'Project: Nalukettu-style home refresh · Eco-friendly + heritage-safe coating',
   },
-  {
-    src: 'images/traditional_interior.jpg',
-    title: 'Timeless Traditional Interior Repaint',
-    description: 'Smooth, polished wall finishes paired with rich, elegant tones to enhance the warmth and classic character of traditional living spaces.',
-    caption: 'Project: Full interior repaint · Durable stain-resistant finish',
-  },
+  
 ];
 
 const sliderStyles = `
+  .gallery-section {
+    padding: 0;
+    margin: 0;
+  }
+
+  .gallery-heading {
+    padding: 0.75rem 1.25rem 0;
+    margin: 0;
+  }
+
   .gallery-slider {
     position: relative;
-    padding: 0 2rem;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    height: 100vh;
   }
 
   .gallery-carousel {
     overflow: hidden;
+    width: 100%;
+    height: 100vh;
   }
 
   .gallery-track {
     display: flex;
-    gap: 1.5rem;
     transition: transform 0.6s ease;
     will-change: transform;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    height: 100vh;
+  }
+
+  .gallery-item-wrapper {
+    flex: 0 0 100vw;
+    width: 100vw;
+    padding: 0;
   }
 
   .gallery-item {
-    flex: 0 0 auto;
-    width: 320px;
-    height: 220px;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: #fff;
-  }
-
-  .gallery-item img {
+    position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  .gallery-item img.carousel-image {
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
-    border-radius: 12px;
-    transition: transform 0.4s ease;
     display: block;
+    background: transparent;
+    transition: transform 0.35s ease;
   }
 
-  .gallery-item:hover img {
-    transform: scale(1.05);
-  }
-
-  .gallery-arrow {
+  .gallery-overlay {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(15, 23, 42, 0.8);
-    color: #fff;
-    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.35);
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .gallery-overlay-content {
+    width: 280px;
+    max-width: 90vw;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: #1f2937;
+    text-align: left;
+  }
+
+  body.dark-theme .gallery-overlay-content {
+    background: #1a1a1a;
+  }
+
+  .gallery-overlay h3 {
+    font-size: clamp(1.25rem, 2vw + 0.5rem, 1.75rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #111827;
+  }
+
+  .gallery-overlay p {
+    margin-bottom: 0.35rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #4b5563;
+  }
+
+  .gallery-overlay .caption {
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+
+  .gallery-item:hover .gallery-overlay,
+  .gallery-item:focus-within .gallery-overlay,
+  .gallery-item.show-overlay .gallery-overlay,
+  .gallery-item .gallery-overlay.show-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .gallery-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding: 0;
+  }
+
+  .gallery-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background-color: #d1d5db;
     cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 2;
+    transition: all 0.3s ease;
+    padding: 0;
   }
 
-  .gallery-arrow:hover:not(:disabled) {
-    transform: translateY(-50%) scale(1.05);
+  .gallery-dot.active {
+    background-color: #0d6efd;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.4);
   }
 
-  .gallery-arrow:disabled {
-    opacity: 0.35;
-    cursor: default;
+  .gallery-dot:hover:not(.active) {
+    background-color: #e5e7eb;
+    transform: scale(1.1);
   }
 
-  .gallery-arrow.left {
-    left: 1rem;
+  body.dark-theme .gallery-dot {
+    background-color: rgba(255, 255, 255, 0.5);
   }
 
-  .gallery-arrow.right {
-    right: 1rem;
+  body.dark-theme .gallery-dot.active {
+    background-color: #0d6efd;
+  }
+
+  body.dark-theme .gallery-dot:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  @media (max-width: 991px) {
+    .gallery-item {
+      height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .gallery-slider {
+      width: 100vw;
+      margin: 0;
+      transform: none;
+    }
+
+    .gallery-item-wrapper {
+      width: 100vw;
+    }
+
+    .gallery-item {
+      height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
+    }
+
+    .gallery-overlay-content {
+      width: 260px;
+      max-width: 85vw;
+    }
   }
 
   .lightbox-overlay {
@@ -262,29 +364,7 @@ const sliderStyles = `
     }
   }
 
-  @media (max-width: 1024px) and (min-width: 768px) {
-    .gallery-item {
-      width: 280px;
-      height: 190px;
-    }
-  }
-
   @media (max-width: 767px) {
-    .gallery-slider {
-      padding: 0 1rem;
-    }
-
-    .gallery-item {
-      width: 100%;
-      max-width: none;
-      height: 180px;
-    }
-
-    .gallery-arrow {
-      width: 42px;
-      height: 42px;
-    }
-
     .lightbox-content {
       max-width: 100%;
       max-height: 100vh;
@@ -323,8 +403,7 @@ const sliderStyles = `
 `;
 
 const getItemsPerView = (width) => {
-  if (width >= 1024) return 3;
-  if (width >= 768) return 2;
+  // With full-width slides, always 1 item per view
   return 1;
 };
 
@@ -340,6 +419,9 @@ const Gallery = () => {
   const [zoom, setZoom] = useState(1);
   const touchStartXRef = useRef(null);
   const touchEndXRef = useRef(null);
+  const carouselTouchStartX = useRef(null);
+  const carouselTouchEndX = useRef(null);
+  const [overlayIndex, setOverlayIndex] = useState(null);
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -359,24 +441,9 @@ const Gallery = () => {
   // Calculate translation by measuring actual item positions
   useEffect(() => {
     const calculateTranslation = () => {
-      if (itemRefs.current[currentItemIndex] && trackRef.current) {
-        const currentItem = itemRefs.current[currentItemIndex];
-        const itemOffsetLeft = currentItem.offsetLeft;
-        const trackPaddingLeft = 24; // 1.5rem in pixels
-        const newTranslateX = -(itemOffsetLeft - trackPaddingLeft);
-        setTranslateX(newTranslateX);
-      } else {
-        // Fallback calculation for initial render
-        const getItemWidth = () => {
-          const width = window.innerWidth;
-          if (width >= 1024) return 320;
-          if (width >= 768) return 280;
-          return width - 32;
-        };
-        const gap = 24; // 1.5rem in pixels
-        const fallbackTranslateX = -(currentItemIndex * (getItemWidth() + gap));
-        setTranslateX(fallbackTranslateX);
-      }
+      const wrapperWidth = wrapperRef.current?.offsetWidth || window.innerWidth;
+      const newTranslateX = -(currentItemIndex * wrapperWidth);
+      setTranslateX(newTranslateX);
     };
 
     // Use requestAnimationFrame to ensure DOM is ready
@@ -487,27 +554,64 @@ const Gallery = () => {
     });
   };
 
+  const handleDotClick = (index) => {
+    setCurrentItemIndex(index);
+  };
+
+  const handleHoverStart = (index) => {
+    setOverlayIndex(index);
+  };
+
+  const handleHoverEnd = () => {
+    setOverlayIndex(null);
+  };
+
+  const handleCarouselTouchStart = (event) => {
+    if (!event.touches || event.touches.length === 0) return;
+    carouselTouchStartX.current = event.touches[0].clientX;
+    carouselTouchEndX.current = null;
+  };
+
+  const handleCarouselTouchMove = (event) => {
+    if (!event.touches || event.touches.length === 0) return;
+    carouselTouchEndX.current = event.touches[0].clientX;
+  };
+
+  const handleCarouselTouchEnd = () => {
+    if (carouselTouchStartX.current == null || carouselTouchEndX.current == null) {
+      carouselTouchStartX.current = null;
+      carouselTouchEndX.current = null;
+      return;
+    }
+    const deltaX = carouselTouchStartX.current - carouselTouchEndX.current;
+    const threshold = 50;
+    if (deltaX > threshold) {
+      setCurrentItemIndex((prev) => Math.min(prev + 1, maxItemIndex));
+    } else if (deltaX < -threshold) {
+      setCurrentItemIndex((prev) => Math.max(prev - 1, 0));
+    }
+    carouselTouchStartX.current = null;
+    carouselTouchEndX.current = null;
+  };
+
   const currentImage = images[currentIndex] || images[0];
 
   return (
-    <section id="gallery" className="py-5 themed-gallery">
+    <section id="gallery" className="themed-gallery gallery-section">
       <style>{sliderStyles}</style>
-      <div className="container">
-        <div className="text-center mb-4">
+      <div className="container-fluid p-0">
+        <div className="text-center gallery-heading">
           
           <h2 className="fw-bold">Recent Transformations</h2>
         </div>
         <div className="gallery-slider">
-          <button
-            type="button"
-            className="gallery-arrow left"
-            onClick={handlePrev}
-            disabled={currentItemIndex === 0}
-            aria-label="Previous projects"
+          <div
+            className="gallery-carousel"
+            ref={wrapperRef}
+            onTouchStart={handleCarouselTouchStart}
+            onTouchMove={handleCarouselTouchMove}
+            onTouchEnd={handleCarouselTouchEnd}
           >
-            &#8592;
-          </button>
-          <div className="gallery-carousel" ref={wrapperRef}>
             <div 
               className="gallery-track" 
               ref={trackRef}
@@ -515,39 +619,58 @@ const Gallery = () => {
             >
               {images.map((image, index) => (
                 <div
-                  className="gallery-item"
+                  className="gallery-item-wrapper"
                   key={`${image.src}-${index}`}
                   ref={(el) => {
                     if (el) itemRefs.current[index] = el;
                   }}
-                  onClick={() => openLightbox(index)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                      event.preventDefault();
-                      openLightbox(index);
-                    }
-                  }}
                 >
-                  <img
-                    src={image.src}
-                    alt={image.title || `Project ${index + 1}`}
-                    loading="lazy"
-                  />
+                  <div
+                    className="gallery-item"
+                    onClick={() => openLightbox(index)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openLightbox(index);
+                      }
+                    }}
+                    onMouseEnter={() => handleHoverStart(index)}
+                    onMouseLeave={handleHoverEnd}
+                    onTouchStart={() => handleHoverStart(index)}
+                    onTouchEnd={handleHoverEnd}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.title || `Project ${index + 1}`}
+                      className="carousel-image"
+                      loading="lazy"
+                    />
+                    <div className={`gallery-overlay ${overlayIndex === index ? 'show-overlay' : ''}`}>
+                      <div className="gallery-overlay-content">
+                        {image.title && <h3>{image.title}</h3>}
+                        {image.description && <p>{image.description}</p>}
+                        {image.caption && <p className="caption">{image.caption}</p>}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-          <button
-            type="button"
-            className="gallery-arrow right"
-            onClick={handleNext}
-            disabled={currentItemIndex >= maxItemIndex}
-            aria-label="Next projects"
-          >
-            &#8594;
-          </button>
+          <div className="gallery-pagination">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`gallery-dot ${currentItemIndex === index ? 'active' : ''}`}
+                onClick={() => handleDotClick(index)}
+                aria-label={`Go to image ${index + 1}`}
+                aria-current={currentItemIndex === index ? 'true' : 'false'}
+              />
+            ))}
+          </div>
         </div>
       </div>
       {isLightboxOpen && currentImage && (

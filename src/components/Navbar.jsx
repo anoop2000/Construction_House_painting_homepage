@@ -53,7 +53,7 @@ const Navbar = () => {
           ref={collapseRef}
         >
           <ul className="navbar-nav gap-3 align-items-lg-center">
-            {['home', 'services', 'why-us', 'gallery', 'contact'].map((section) => (
+            {['home', 'services', 'gallery', 'contact'].map((section) => (
               <li className="nav-item" key={section}>
                 <a
                   className="nav-link fw-semibold text-uppercase small"
