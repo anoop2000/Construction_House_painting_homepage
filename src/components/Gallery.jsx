@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const images = [
   {
-    src: '/images/kerala-home-modern.jpg',
+    src: '/images/contemporary_modern_house.jpg',
     title: 'Elegant Kerala Style Modern Home',
     description: 'A full professional exterior repaint using weather-shield coatings, enhancing the architecture’s clean lines and natural light. Balanced tones chosen to elevate curb appeal and long-term durability.',
     caption: 'Project: Modern Kerala home exterior makeover · UV-resistant + all-weather protection',
