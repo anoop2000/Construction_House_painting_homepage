@@ -98,7 +98,7 @@ section h5:hover::after {
 }
 
 .page-content {
-  margin-top: 80px;
+  margin-top: 57px;
 }
 
 section {
@@ -108,7 +108,7 @@ section {
 .hero-section {
   min-height: 90vh;
   background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)),
-    url('https://images.unsplash.com/photo-1503387762-592deb58ef4e') center/cover no-repeat;
+    url('C:\Users\anoop\OneDrive\Documents\Construction_House_painting_homepage\public\images\home_image.jpg') center/cover no-repeat;
   padding: 6rem 0;
 }
 
