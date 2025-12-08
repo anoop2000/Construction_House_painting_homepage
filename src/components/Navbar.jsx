@@ -34,7 +34,12 @@ const Navbar = () => {
             handleNavClick('home');
           }}
         >
-          PrimeBuild
+          <img
+            src="/images/painting_logo.png"
+            alt="Company Logo"
+            height="40"
+            className="border border-light shadow-sm"
+          />
         </a>
         <button
           className="navbar-toggler"
