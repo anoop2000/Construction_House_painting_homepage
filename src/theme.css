@@ -170,4 +170,124 @@ body.dark-theme .theme-toggle-btn:hover {
   border: 1px solid var(--border-color);
 }
 
+.hero-title span {
+  font-size: 3rem;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  border-right: 3px solid #fff;
+  background-image: linear-gradient(90deg, #ff6b6b, #f2c94c, #ff9f43, #ff6ec7);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: typing 1.2s steps(30) forwards, glow 0.3s ease forwards;
+}
+
+.hero-title span:nth-child(1) {
+  animation-delay: 0s, 1.2s;
+}
+
+.hero-title span:nth-child(2) {
+  animation-delay: 1.3s, 2.5s;
+  padding-left: 7.5rem;
+}
+
+.hero-title span:nth-child(3) {
+  animation-delay: 2.6s, 3.8s;
+  padding-left: 20rem;
+}
+
+@media (max-width: 576px) {
+  .hero-title span {
+    font-size: 2rem;
+  }
+
+  .hero-title span:nth-child(2) {
+    padding-left: 1.5rem;
+  }
+
+  .hero-title span:nth-child(3) {
+    padding-left: 3rem;
+  }
+}
+
+.hero-palette-loader {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  animation: rotate-palette 12s linear infinite;
+}
+
+.hero-palette-loader .paint-drop {
+  position: absolute;
+  width: 26px;
+  height: 32px;
+  border-radius: 60% 70% 70% 60%;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+}
+
+.hero-palette-loader .drop-1 {
+  background: #ff6b6b;
+  transform: rotate(0deg) translate(50px);
+}
+
+.hero-palette-loader .drop-2 {
+  background: #f2c94c;
+  transform: rotate(45deg) translate(50px);
+}
+
+.hero-palette-loader .drop-3 {
+  background: #ff9f43;
+  transform: rotate(90deg) translate(50px);
+}
+
+.hero-palette-loader .drop-4 {
+  background: #ff6ec7;
+  transform: rotate(135deg) translate(50px);
+}
+
+.hero-palette-loader .drop-5 {
+  background: #ffa8a8;
+  transform: rotate(180deg) translate(50px);
+}
+
+.hero-palette-loader .drop-6 {
+  background: #ffc5e6;
+  transform: rotate(225deg) translate(50px);
+}
+
+.hero-palette-loader .drop-7 {
+  background: #ffd27f;
+  transform: rotate(270deg) translate(50px);
+}
+
+.hero-palette-loader .drop-8 {
+  background: #ffeaa7;
+  transform: rotate(315deg) translate(50px);
+}
+
+@keyframes rotate-palette {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes typing {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes glow {
+  to {
+    border-color: transparent;
+    background-position: 100% 0;
+  }
+}
+
 
