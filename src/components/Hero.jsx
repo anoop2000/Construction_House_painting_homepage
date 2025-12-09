@@ -19,7 +19,7 @@ const Hero = () => {
           <div className="paint-drop drop-8"></div>
         </div>
         <p className="lead mb-4">
-          From custom builds to luxury finishes for Contruction and Painting Services.
+          From custom builds to luxury finishes for Painting and Construction Services.
         </p>
         <div className="d-flex flex-column flex-sm-row justify-content-center gap-6">
          

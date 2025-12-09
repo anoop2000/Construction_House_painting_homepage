@@ -13,6 +13,30 @@ const images = [
     description: 'A tasteful repaint preserving the cultural charm of Nalukettu architecture with fresh, breathable colors and natural finishes that highlight wooden elements.',
     caption: 'Project: Nalukettu-style home refresh · Eco-friendly + heritage-safe coating',
   },
+  {
+    src: '/images/modern_home_three.jpg',
+    title: 'Elegant Kerala Style Modern Home',
+    description: 'A full professional exterior repaint using weather-shield coatings, enhancing the architecture’s clean lines and natural light. Balanced tones chosen to elevate curb appeal and long-term durability.',
+    caption: 'Project: Modern Kerala home exterior makeover · UV-resistant + all-weather protection',
+  },
+  {
+    src: 'images/traditional_home_one.jpg',
+    title: 'Heritage Nalukettu Restoration',
+    description: 'A tasteful repaint preserving the cultural charm of Nalukettu architecture with fresh, breathable colors and natural finishes that highlight wooden elements.',
+    caption: 'Project: Nalukettu-style home refresh · Eco-friendly + heritage-safe coating',
+  },
+  {
+    src: '/images/modern_home_two.jpg',
+    title: 'Elegant Kerala Style Modern Home',
+    description: 'A full professional exterior repaint using weather-shield coatings, enhancing the architecture’s clean lines and natural light. Balanced tones chosen to elevate curb appeal and long-term durability.',
+    caption: 'Project: Modern Kerala home exterior makeover · UV-resistant + all-weather protection',
+  },
+  {
+    src: 'images/traditional_home_two.jpg',
+    title: 'Heritage Nalukettu Restoration',
+    description: 'A tasteful repaint preserving the cultural charm of Nalukettu architecture with fresh, breathable colors and natural finishes that highlight wooden elements.',
+    caption: 'Project: Nalukettu-style home refresh · Eco-friendly + heritage-safe coating',
+  },
   
 ];
 

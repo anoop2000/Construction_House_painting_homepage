@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState, useEffect } from 'react';
 import Collapse from 'bootstrap/js/dist/collapse';
 import { ThemeContext } from '../App.jsx';
 
@@ -7,12 +7,37 @@ const Navbar = () => {
   const navigate = useNavigate();
   const collapseRef = useRef(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const closeMobileMenu = () => {
     if (collapseRef.current) {
       Collapse.getOrCreateInstance(collapseRef.current)?.hide();
+      setIsMenuOpen(false);
     }
   };
+
+  const toggleMobileMenu = () => {
+    if (collapseRef.current) {
+      const collapseInstance = Collapse.getOrCreateInstance(collapseRef.current);
+      collapseInstance.toggle();
+    }
+  };
+
+  useEffect(() => {
+    const collapseElement = collapseRef.current;
+    if (collapseElement) {
+      const handleShow = () => setIsMenuOpen(true);
+      const handleHide = () => setIsMenuOpen(false);
+
+      collapseElement.addEventListener('shown.bs.collapse', handleShow);
+      collapseElement.addEventListener('hidden.bs.collapse', handleHide);
+
+      return () => {
+        collapseElement.removeEventListener('shown.bs.collapse', handleShow);
+        collapseElement.removeEventListener('hidden.bs.collapse', handleHide);
+      };
+    }
+  }, []);
 
   const handleNavClick = (section) => {
     navigate({ hash: section }); // updates /#/contact etc. via React Router
@@ -35,20 +60,19 @@ const Navbar = () => {
           }}
         >
           <img
-            src="/images/painting_logo.png"
+            src={theme === 'dark' ? '/images/painting_logo_black.png' : '/images/painting_logo_wh.png'}
             alt="Company Logo"
             height="40"
-            className="border border-light shadow-sm"
+            className={theme === 'dark' ? 'shadow-sm' : 'border border-light shadow-sm'}
           />
         </a>
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
           aria-controls="navbarNav"
-          aria-expanded="false"
+          aria-expanded={isMenuOpen}
           aria-label="Toggle navigation"
+          onClick={toggleMobileMenu}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
