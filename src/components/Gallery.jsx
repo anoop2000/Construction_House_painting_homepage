@@ -213,14 +213,39 @@ const sliderStyles = `
     }
 
     .gallery-item {
-      height: 100vh;
-      min-height: 100vh;
-      max-height: 100vh;
+      height: auto;
+      min-height: 60vh;
+      max-height: none;
+    }
+
+    .gallery-item img.carousel-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 100%;
     }
 
     .gallery-overlay-content {
       width: 260px;
       max-width: 85vw;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .recent-transform {
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      background-color: #ffffff;
+      min-height: 60vh;
+    }
+
+    .recent-transform img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 100%;
     }
   }
 
